@@ -25,6 +25,5 @@ public class ProdutorTopic {
             template.convertAndSend("myExchange", "foo.bar", "Hello CloudAMQP! "+ i);
         }
 
-
     }
 }
