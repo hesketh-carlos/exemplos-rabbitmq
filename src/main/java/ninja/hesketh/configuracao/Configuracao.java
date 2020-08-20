@@ -8,10 +8,10 @@ public class Configuracao {
     public static CachingConnectionFactory getConnection(){
 
         if(connectionFactory == null){
-            connectionFactory = new CachingConnectionFactory("spider.rmq.cloudamqp.com");
-            connectionFactory.setUsername("vdchtboi");  //SET TEU USUARIO    !!!!!
-            connectionFactory.setPassword("jOvyU_kOnG-2AgDQ_Uz-PXhYMZnPV-ts"); //SENHA !!!!!
-            connectionFactory.setVirtualHost("vdchtboi");
+            connectionFactory = new CachingConnectionFactory("***********");//TODO add hostname
+            connectionFactory.setUsername("********");//TODO add username
+            connectionFactory.setPassword("********");//TODO add password
+            connectionFactory.setVirtualHost("********");//TODO add virtualhost
 
             //Recommended settings
             connectionFactory.setRequestedHeartBeat(30);

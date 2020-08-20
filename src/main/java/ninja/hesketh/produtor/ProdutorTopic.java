@@ -15,15 +15,17 @@ public class ProdutorTopic {
         RabbitAdmin admin = new RabbitAdmin(Configuracao.getConnection());
         Queue queue = new Queue("myQueue");
         admin.declareQueue(queue);
-        TopicExchange exchange = new TopicExchange("myExchange");
+        TopicExchange exchange = new TopicExchange("exchange.topic");
         admin.declareExchange(exchange);
-        admin.declareBinding(BindingBuilder.bind(queue).to(exchange).with("foo.*"));
+        admin.declareBinding(BindingBuilder.bind(queue).to(exchange).with("app1.#.error"));
+        //admin.declareBinding(BindingBuilder.bind(queue).to(exchange).with("app1.#.error")); posso usar o "*"
 
         RabbitTemplate template = new RabbitTemplate(Configuracao.getConnection());
 
-        for (int i = 0; i < 10; i++) {
-            template.convertAndSend("myExchange", "foo.bar", "Hello CloudAMQP! "+ i);
-        }
+        template.convertAndSend("exchange.topic", "app1.log.error", "Hello CloudAMQP! ");//atende
+        template.convertAndSend("exchange.topic", "app1.logg.info", "Hello CloudAMQP! "); // não atende!!
+        template.convertAndSend("exchange.topic", "app1.error", "Hello CloudAMQP! "); //atende
+
 
     }
 }

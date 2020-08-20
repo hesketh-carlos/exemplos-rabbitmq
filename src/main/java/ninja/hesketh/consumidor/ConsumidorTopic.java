@@ -9,11 +9,15 @@ public class ConsumidorTopic {
         //Set up queue, exchanges and bindings
         RabbitTemplate template = new RabbitTemplate(Configuracao.getConnection());
 
-        for (int i = 0; i < 10; i++) {
-            byte[] body = template.receive("myQueue").getBody();
-            System.out.println(new String(body));
+        while(true){
+            try {
+                byte[] body = template.receive("myQueue").getBody();
+                System.out.println(new String(body));
+            } catch (NullPointerException ex){
+                System.out.println("fila vazia!");
+                continue;
+            }
         }
-
 
     }
 
